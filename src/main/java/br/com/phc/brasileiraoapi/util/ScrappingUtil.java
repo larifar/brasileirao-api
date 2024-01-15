@@ -46,6 +46,12 @@ public class ScrappingUtil {
 			String nomeEquipeVisitante = recuperaNomeEquipeVisitante(document);
 			LOGGER.info("Nome da equipe visitante: {}", nomeEquipeVisitante);
 			
+			String urlLogoEquipeCasa = recuperaLogoEquipeCasa(document);
+			LOGGER.info("URL da equipe casa: {}", urlLogoEquipeCasa);
+			
+			String urlLogoEquipeVisitante = recuperaLogoEquipeVisitante(document);
+			LOGGER.info("URL da equipe visitante: {}", urlLogoEquipeVisitante);
+			
 		} catch (IOException e) {
 			LOGGER.error("ERRO AO TENTAR CONECTAR NO GOOGLE COM JSOUP -> {}", e.getMessage());
 		}
@@ -104,6 +110,16 @@ public class ScrappingUtil {
 	public String recuperaNomeEquipeVisitante(Document document) {
 		Element elemento = document.selectFirst("div[class=imso_mh__second-tn-ed imso_mh__tnal-cont imso-tnol]");
 		return elemento.select("span").text();
+	}
+	
+	public String recuperaLogoEquipeCasa(Document document) {
+		Element elemento = document.selectFirst("div[class=imso_mh__first-tn-ed imso_mh__tnal-cont imso-tnol]");
+		return elemento.select("img[class=imso_btl__mh-logo]").attr("src");
+	}
+	
+	public String recuperaLogoEquipeVisitante(Document document) {
+		Element elemento = document.selectFirst("div[class=imso_mh__second-tn-ed imso_mh__tnal-cont imso-tnol]");
+		return elemento.select("img[class=imso_btl__mh-logo]").attr("src");
 	}
 
 }
