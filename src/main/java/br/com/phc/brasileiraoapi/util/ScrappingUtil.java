@@ -18,6 +18,9 @@ public class ScrappingUtil {
 	private static final Logger LOGGER = LoggerFactory.getLogger(ScrappingUtil.class);
 	private static final String BASE_URL_GOOGLE = "https://www.google.com/search?q=" ;
 	private static final String COMPLEMENTO_URL_GOOGLE = "&hl=pt-BR" ;
+	
+	private static final String CASA = "casa";
+	private static final String VISITANTE = "visitante";
 
 	public static void main(String[] args) {
 		String url = BASE_URL_GOOGLE + "corinthians+x+palmeiras+08/08/2020" + COMPLEMENTO_URL_GOOGLE ;
@@ -53,6 +56,12 @@ public class ScrappingUtil {
 				
 				String golsEquipeVisitante = recuperaGolsEquipeVisitante(document);
 				LOGGER.info("Gols do visitante: {}", golsEquipeVisitante);
+				
+				Integer placarEstendidoEquipeCasa = buscaPenalidades(document, CASA);
+				LOGGER.info("Placar estendido da casa: {}", placarEstendidoEquipeCasa);
+				Integer placarEstendidoEquipeVisitante = buscaPenalidades(document, VISITANTE);
+				LOGGER.info("Placar estendido do visitante: {}", placarEstendidoEquipeVisitante);
+				
 			}
 			
 			String nomeEquipeCasa = recuperaNomeEquipeCasa(document);
@@ -139,12 +148,12 @@ public class ScrappingUtil {
 	
 	public Integer recuperaPlacarEquipeCasa(Document document) {
 		String placarEquipe = document.selectFirst("div[class=imso_mh__l-tm-sc imso_mh__scr-it imso-light-font]").text();
-		return Integer.valueOf(placarEquipe);
+		return formataPlacarStringInteger(placarEquipe);
 	}
 	
 	public Integer recuperaPlacarEquipeVisitante(Document document) {
 		String placarEquipe = document.selectFirst("div[class=imso_mh__r-tm-sc imso_mh__scr-it imso-light-font]").text();
-		return Integer.valueOf(placarEquipe);
+		return formataPlacarStringInteger(placarEquipe);
 	}
 	
 	public String recuperaGolsEquipeCasa(Document document) {
@@ -169,6 +178,31 @@ public class ScrappingUtil {
 		}
 		
 		return String.join(", ", golsEquipe);
+	}
+	
+	public Integer buscaPenalidades(Document document, String tipoEquipe) {
+		boolean isPenalidade = document.select("div[class=imso_mh_s__psn-sc]").isEmpty();
+		if(!isPenalidade) {
+			String penalidades = document.select("div[class=imso_mh_s__psn-sc]").text();
+			String penalidadesCompleta = penalidades.substring(0, 5).replace(" ", "");
+			
+			String[] divisao = penalidadesCompleta.split("-");
+			
+			return tipoEquipe.equals(CASA) ? formataPlacarStringInteger(divisao[0]) : formataPlacarStringInteger(divisao[1]);
+		}
+		
+		return null;
+	}
+	
+	public Integer formataPlacarStringInteger(String placar) {
+		Integer valor;
+		try {
+			valor = Integer.parseInt(placar);
+		}catch (Exception e) {
+			valor = 0;
+		}
+		
+		return valor;
 	}
 
 }
