@@ -3,10 +3,13 @@ package br.com.phc.brasileiraoapi.util;
 import br.com.phc.brasileiraoapi.dto.PartidaGoogleDto;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,7 +20,7 @@ public class ScrappingUtil {
 	private static final String COMPLEMENTO_URL_GOOGLE = "&hl=pt-BR" ;
 
 	public static void main(String[] args) {
-		String url = BASE_URL_GOOGLE + "lazio+x+roma" + COMPLEMENTO_URL_GOOGLE ;
+		String url = BASE_URL_GOOGLE + "corinthians+x+palmeiras+08/08/2020" + COMPLEMENTO_URL_GOOGLE ;
 		
 		ScrappingUtil scrapping = new ScrappingUtil();
 		scrapping.obtemInfoPartida(url);
@@ -44,6 +47,12 @@ public class ScrappingUtil {
 				
 				Integer placarEquipeVisitante = recuperaPlacarEquipeVisitante(document);
 				LOGGER.info("Placar equipe Visitante: {}", placarEquipeVisitante);
+				
+				String golsEquipeCasa = recuperaGolsEquipeCasa(document);
+				LOGGER.info("Gols da casa: {}", golsEquipeCasa);
+				
+				String golsEquipeVisitante = recuperaGolsEquipeVisitante(document);
+				LOGGER.info("Gols do visitante: {}", golsEquipeVisitante);
 			}
 			
 			String nomeEquipeCasa = recuperaNomeEquipeCasa(document);
@@ -136,6 +145,30 @@ public class ScrappingUtil {
 	public Integer recuperaPlacarEquipeVisitante(Document document) {
 		String placarEquipe = document.selectFirst("div[class=imso_mh__r-tm-sc imso_mh__scr-it imso-light-font]").text();
 		return Integer.valueOf(placarEquipe);
+	}
+	
+	public String recuperaGolsEquipeCasa(Document document) {
+		List<String> golsEquipe = new ArrayList<>();
+		
+		Elements elementos = document.select("div[class=imso_gs__tgs imso_gs__left-team]").select("div[class=imso_gs__gs-r]");
+		for (Element e: elementos) {
+			String infoGol = e.select("div[class=imso_gs__gs-r]").text();
+			golsEquipe.add(infoGol);
+		}
+		
+		return String.join(", ", golsEquipe);
+	}
+	
+	public String recuperaGolsEquipeVisitante(Document document) {
+		List<String> golsEquipe = new ArrayList<>();
+		
+		Elements elementos = document.select("div[class=imso_gs__tgs imso_gs__right-team]").select("div[class=imso_gs__gs-r]");
+		for (Element e: elementos) {
+			String infoGol = e.select("div[class=imso_gs__gs-r]").text();
+			golsEquipe.add(infoGol);
+		}
+		
+		return String.join(", ", golsEquipe);
 	}
 
 }
