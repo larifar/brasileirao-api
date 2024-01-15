@@ -38,6 +38,12 @@ public class ScrappingUtil {
 			if(statusPartida != StatusPartida.PARTIDA_NAO_INICIADA) {
 				String tempoPartida = obtemTempoPartida(document);
 				LOGGER.info("Tempo da partida: {}",tempoPartida);
+				
+				Integer placarEquipeCasa = recuperaPlacarEquipeCasa(document);
+				LOGGER.info("Placar equipe casa: {}", placarEquipeCasa);
+				
+				Integer placarEquipeVisitante = recuperaPlacarEquipeVisitante(document);
+				LOGGER.info("Placar equipe Visitante: {}", placarEquipeVisitante);
 			}
 			
 			String nomeEquipeCasa = recuperaNomeEquipeCasa(document);
@@ -120,6 +126,16 @@ public class ScrappingUtil {
 	public String recuperaLogoEquipeVisitante(Document document) {
 		Element elemento = document.selectFirst("div[class=imso_mh__second-tn-ed imso_mh__tnal-cont imso-tnol]");
 		return elemento.select("img[class=imso_btl__mh-logo]").attr("src");
+	}
+	
+	public Integer recuperaPlacarEquipeCasa(Document document) {
+		String placarEquipe = document.selectFirst("div[class=imso_mh__l-tm-sc imso_mh__scr-it imso-light-font]").text();
+		return Integer.valueOf(placarEquipe);
+	}
+	
+	public Integer recuperaPlacarEquipeVisitante(Document document) {
+		String placarEquipe = document.selectFirst("div[class=imso_mh__r-tm-sc imso_mh__scr-it imso-light-font]").text();
+		return Integer.valueOf(placarEquipe);
 	}
 
 }
