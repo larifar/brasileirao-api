@@ -1,5 +1,7 @@
 package br.com.phc.brasileiraoapi.service;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.modelmapper.ModelMapper;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import br.com.phc.brasileiraoapi.dto.EquipeDto;
 import br.com.phc.brasileiraoapi.dto.PartidaDto;
+import br.com.phc.brasileiraoapi.dto.PartidaGoogleDto;
 import br.com.phc.brasileiraoapi.dto.PartidaResponseDto;
 import br.com.phc.brasileiraoapi.entity.Equipe;
 import br.com.phc.brasileiraoapi.entity.Partida;
@@ -62,6 +65,27 @@ public class PartidaService {
 		partida.setLocalPartida(dto.getLocalPartida());
 		
 		salvarPartida(partida);
+	}
+
+	public void atualizaPartida(Partida partida, PartidaGoogleDto partidaGoogle) {
+		partida.setPlacarQuipeCasa(partidaGoogle.getPlacarEquipeCasa());
+		partida.setPlacarQuipeVisitante(partidaGoogle.getPlacarEquipeVisitante());
+		partida.setGolsEquipeCasa(partidaGoogle.getGolsEquipeCasa());
+		partida.setGolsEquipeVisitante(partidaGoogle.getGolsEquipeVisitante());
+		partida.setPlacarEstendidoEquipeCasa(partidaGoogle.getPlacarEstendidoEquipeCasa());
+		partida.setPlacarEstendidoEquipeVisitante(partidaGoogle.getPlacarEstendidoEquipeVisitante());
+		partida.setTempoPartida(partidaGoogle.getTempoPartida());
+		
+		salvarPartida(partida);
+		
+	}
+
+	public List<Partida> listarPartidasPeriodo() {
+		return partidaRepository.listarPartidasPeriodo();
+	}
+
+	public Integer buscarQuantidadePartidasPeriodo() {
+		return partidaRepository.buscarQuantidadePartidasPeriodo();
 	}
 
 }
