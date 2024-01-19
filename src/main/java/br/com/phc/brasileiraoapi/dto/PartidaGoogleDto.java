@@ -2,6 +2,7 @@ package br.com.phc.brasileiraoapi.dto;
 
 import java.io.Serializable;
 
+import br.com.phc.brasileiraoapi.util.StatusPartida;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ import lombok.Setter;
 public class PartidaGoogleDto implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	private String statusPartida;
+	private StatusPartida statusPartida;
 	private String tempoPartida;
 	// info equipe da casa
 	private String nomeEquipeCasa;

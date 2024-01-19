@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.phc.brasileiraoapi.dto.PartidaGoogleDto;
 import br.com.phc.brasileiraoapi.entity.Partida;
 import br.com.phc.brasileiraoapi.util.ScrappingUtil;
+import br.com.phc.brasileiraoapi.util.StatusPartida;
 
 @Service
 public class ScrapingService {
@@ -31,7 +32,9 @@ public class ScrapingService {
 				
 				PartidaGoogleDto partidaGoogle = scrappingUtil.obtemInfoPartida(urlPartida);
 				
-				partidaService.atualizaPartida(partida, partidaGoogle);
+				if(partidaGoogle.getStatusPartida() != StatusPartida.PARTIDA_NAO_INICIADA) {
+					partidaService.atualizaPartida(partida, partidaGoogle);
+				}
 			});
 			
 			

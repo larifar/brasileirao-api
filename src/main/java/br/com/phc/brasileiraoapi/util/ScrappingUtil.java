@@ -12,7 +12,9 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ScrappingUtil {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ScrappingUtil.class);
@@ -43,7 +45,7 @@ public class ScrappingUtil {
 			LOGGER.info("Titulo da página: {}", title);
 			
 			StatusPartida statusPartida = obtemStatusPartida(document);
-			partida.setStatusPartida(statusPartida.toString());
+			partida.setStatusPartida(statusPartida);
 			LOGGER.info("Status da partida: {}", statusPartida);
 			
 			if(statusPartida != StatusPartida.PARTIDA_NAO_INICIADA) {
