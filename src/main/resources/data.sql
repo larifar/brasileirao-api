@@ -1,0 +1,22 @@
+
+INSERT INTO `equipe` (`equipe_id`, `nome_equipe`, `url_logo_equipe`) VALUES
+(1, 'Athletico-PR', 'https://seeklogo.com/images/A/atletico-pr-logo-CD2FBD1390-seeklogo.com.png'),
+(2, 'Atlético-GO', 'https://seeklogo.com/images/A/atletico-go-logo-44F10F9209-seeklogo.com.png'),
+(3, 'Palmeiras', 'https://seeklogo.com/images/P/palmeiras-logo-9ECCEA469E-seeklogo.com.png'),
+(4, 'Atlético-MG', 'https://seeklogo.com/images/A/atletico-mg-logo-62B8B96E45-seeklogo.com.png'),
+(5, 'Botafogo', 'https://ssl.gstatic.com/onebox/media/sports/logos/KLDWYp-H8CAOT9H_JgizRg_96x96.png'),
+(6, 'Flamengo', 'https://ssl.gstatic.com/onebox/media/sports/logos/orE554NToSkH6nuwofe7Yg_96x96.png'),
+(7, 'Corinthians', 'https://ssl.gstatic.com/onebox/media/sports/logos/tCMSqgXVHROpdCpQhzTo1g_96x96.png'),
+(8, 'Fluminense', 'https://ssl.gstatic.com/onebox/media/sports/logos/fCMxMMDF2AZPU7LzYKSlig_96x96.png'),
+(9, 'Grêmio', 'https://ssl.gstatic.com/onebox/media/sports/logos/Ku-73v_TW9kpex-IEGb0ZA_96x96.png'),
+(10, 'Internacional', 'https://ssl.gstatic.com/onebox/media/sports/logos/OWVFKuHrQuf4q2Wk0hEmSA_96x96.png'),
+(11, 'Fortaleza', 'https://ssl.gstatic.com/onebox/media/sports/logos/me10ephzRxdj45zVq1Risg_96x96.png'),
+(12, 'RB Bragantino', 'https://ssl.gstatic.com/onebox/media/sports/logos/KR_KUEAw5NGP0npb2dOpig_96x96.png'),
+(13, 'São Paulo', 'https://ssl.gstatic.com/onebox/media/sports/logos/4w2Z97Hf9CSOqICK3a8AxQ_96x96.png'),
+(14, 'Vasco da Gama', 'https://ssl.gstatic.com/onebox/media/sports/logos/_4RUqwd5euAxf0MtbPwq4A_96x96.png'),
+(15, 'Cruzeiro', 'https://seeklogo.com/images/C/Cruzeiro_Esporte_Clube-logo-E41C56B8CC-seeklogo.com.png'),
+(16, 'Bahia', 'https://seeklogo.com/images/B/Bahia-logo-0BF5C9A502-seeklogo.com.png'),
+(17, 'Juventude', 'https://seeklogo.com/images/J/Juventude-logo-FCEE704B20-seeklogo.com.png'),
+(18, 'Criciúma', 'https://seeklogo.com/images/C/criciuma-esporte-clube-logo-29371E1CC8-seeklogo.com.png'),
+(19, 'Vitória', 'https://seeklogo.com/images/E/Esporte_Clube_Vitoria_de_Salvador-BA-logo-9ACB56091F-seeklogo.com.png'),
+(20, 'Cuiabá', 'https://seeklogo.com/images/C/cuiaba-esporte-clube-logo-C39FD2778A-seeklogo.com.png');

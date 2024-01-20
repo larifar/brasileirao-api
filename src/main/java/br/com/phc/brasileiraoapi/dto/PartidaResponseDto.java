@@ -3,7 +3,6 @@ package br.com.phc.brasileiraoapi.dto;
 import java.io.Serializable;
 import java.util.List;
 
-import br.com.phc.brasileiraoapi.entity.Equipe;
 import br.com.phc.brasileiraoapi.entity.Partida;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
